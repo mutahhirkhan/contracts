@@ -1,0 +1,139 @@
+blockchain Questions:
+- As long as there have been two or more people on Earth who wished to keep a secret from someone else, there has been cryptography 
+- Ease of liquidity Monetary assets can be fairly easily liquidated and converted to cash.
+- what is hyperledger
+- Why is the blockchain referred to as a distributed ledger?
+- how the data of ownership of tengible asset be stored on blockchain, 
+- 2 blocks aik sath mine hongy tw konsi chain chalegi ?
+- if we divide a transaction into sub-transactions, would the cost remains equale ?
+- if there is no intermediaries, then wo confirms the transactions and what role does minners play ?
+- does emit contains the values of arguments passes in the event is there any condition that event is unable to listen in js ?
+- why events generated logs are not accessible within the contract ?
+- Blockchain also enables tokenization models that can enable organizations of all sizes to create truly digitized physical assets
+
+
+
+
+
+
+
+NOTES:
+- it is time stamped apend on the log   -----------> transparancy, security, scalability
+- the data stuctre is similar to linkedlist
+- block k ander header me metga data hota aur state me real data save hota
+- markle tree - contains literal transaction data 
+- avalanche blockchain
+- consesus alog, proof of work, 
+- redundent food
+- hash is of 32bit
+- Bitcoin is a blockchain and BTC is its native currency
+- blockchain can also be called record keeping mechanism, it is simply a ledger, the records stay on the blockchain (they are the blockchain)
+- Assets are simply the items that we’re keeping records about, the items that ‘matter’ in the context of a given solution or use case
+- Assets can be defined: ---> as anything that requires a record of ownership
+- trustlessness: making any type of transaction without having trust to other party as long as both the parties trust in accuracy and integrity of the ledger
+-blockchain is an event tracking system where announcements mark the occurrence of significant events and those events can be made actionable through the 
+		use of Smart Contracts/Chaincode; software programmed to respond to certain types of these events
+- Any transactions presented by that account will be verified by the network using the corresponding public key for the account.
+- People refer to it as “distributed” because no single entity manages a blockchain ledger system on its own. 
+		The ledger is distributed across a network of computers, also known as “nodes,” and each involved party has access to the ledger.
+- Killer application: - -> In marketing terminology, a killer application is any computer program or software that is so necessary or desirable 
+		that it proves the core value of some larger technology, such as computer hardware, a video game console, software, a programming language, a software platform, or an operating system
+- cryptocurrency: the first killer app, the first consumer-grade application built on blockchain and deployed at scale 
+- double spend problem: many cryptocurrencies lack in this thing this problem can occur while creating a decentralized cryptocurrency. Double spending means spending a digital token more than once,while this 
+		digital currency originally refers to digital file that can be duplicated or falsified. 
+		using blockchain technology this problem solved by confirming a transaction and putting this transaction into a block then add the block to the chain
+- fungible means any other unit in the store of value is equale to the current unit value
+- blockchain remove the intermediaries such as (such as banks, custodians, and different types of trustees)
+- Smart Contract as a replacement for middlemen operators
+- A distributed ledger is fault tolerant in that if a single node were to lose track of the  ledger it would remain somewhere else on the network
+- • Permissoned vs. Permissionless
+- The blockchain provides a snapshot of the current state
+
+chapter 6
+- To chain blocks together today, all data in a block is run through a special function called a "cryptographic hash". 
+		Cryptographic hashes create a unique output or identifier for a specific input. 
+
+chapter 7
+- Cryptography is the study of how to send information back and forth securely in the presence of adversaries
+- There are a number of benefits to Blockchain solutions which include being publicly verifiable, secure, transparent, and cost-effective
+-   A Merkle Tree is a lightweight digital fingerprint of all the transactions within a block which serves as an index to the blockchain
+ - 
+
+
+
+
+S O L I D I T Y  
+- pragma is a version - this version would be used by the solidity compiler
+- State variables are permanently stored in contract storage
+- x = 3 &   y = 2 -------------------------- > x ^ y == x ** y == 3*3 
+- Zombie[ ] public zombies -------------- > here zombies = name of array Zombie = struct type 
+- memory keyword is used in parameters to pass it as pass by value.
+- private functions name starts with _ (underscore) e.g. _privateFn
+
+//pure vs view
+- for view only functions --------> use view keywod next to public/private
+- if function is not using any app's state then make it pure like a multiply function using parameters  and return them
+
+- keccak256 ------> ehthereum built-in function use to encode bytes. before passing params convert the param into bytes using abi.encodePacked("to encode");
+
+- event fires when something happened on the blockchain to you front-end
+			event IntegersAdded(uint x, uint y, uint result);
+
+			function add(uint _x, uint _y) public returns (uint) {
+				uint result = _x + _y;
+				// fire an event to let the app know the function was called:
+				emit IntegersAdded(_x, _y, result);
+				return result;
+			}
+			 A javascript implementation would look something like:
+
+			YourContract.IntegersAdded(function(error, result) {
+				// do something with result
+			})
+	events are listened in JS
+	---------------------------------------------------------------------------------------------------------------
+	L E S S O N   2 
+// For a financial app, storing a uint that holds the user's account balance:
+mapping (address => uint) public accountBalance;
+// Or could be used to store / lookup usernames based on userId
+mapping (uint => string) userIdToName;
+
+
+- A mapping is essentially a key-value store for storing and looking up data. In the first example, the key is an address and the value is a uint, and in the second example the key is a uint and the value a string.
+- In Solidity, there are certain global variables that are available to all functions. One of these is msg.sender, which refers to the address of the person (or smart contract) who called the current function.
+- Note: In Solidity, function execution always needs to start with an external caller. A contract will just sit on the blockchain doing nothing until someone calls one of its functions. So there will always be a msg.sender.
+
+- function call only oncefunction sayHiToVitalik(string memory _name) public returns (string memory) {
+  // Compares if _name equals "Vitalik". Throws an error and exits if not true.
+  // (Side note: Solidity doesn't have native string comparison, so we
+  // compare their keccak256 hashes to see if the strings are equal)
+  require(keccak256(abi.encodePacked(_name)) == keccak256(abi.encodePacked("Vitalik")));
+  // If it's true, proceed with the function:
+  return "Hi!";
+}
+
+- types of storage in solidity
+		Storage refers to variables stored permanently on the blockchain. Memory variables are temporary, and are erased between external function calls to your contract. Think of it like your computer's hard disk vs RAM.
+- default variables inside a functions are memory and state variables are storage(blockchain saved) 
+- specify storage type when dealing with structs and arrays
+
+- function multipleReturns() internal returns(uint a, uint b, uint c) {
+	  return (1, 2, 3);
+	}
+
+	function processMultipleReturns() external {
+	  uint a;
+	  uint b;
+	  uint c;
+	  // This is how you do multiple assignment:
+	  (a, b, c) = multipleReturns();
+	}
+
+	// Or if we only cared about one of the values:
+	function getLastReturnValue() external {
+	  uint c;
+	  // We can just leave the other fields blank:
+	  (,,c) = multipleReturns();
+	} 
+	
+
