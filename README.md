@@ -8,6 +8,7 @@ This repository contains source codes for zombie war game.
 
 ## How To Use
 You can simply clone the project to your local storage with following command:
+change the imports root paths:
 
 ```
 git clone https://github.com/mutahhirkhan/contracts.git
