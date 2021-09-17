@@ -1,8 +1,7 @@
  //SPDX-License-Identifier: MIT
+pragma solidity ^0.5.16;
 
-pragma solidity ^0.5.0;
-
-contract ZombieFactory {
+contract CryptoZombies {
 
     event NewZombie(uint zombieId, string name, uint dna);
 
@@ -26,7 +25,7 @@ contract ZombieFactory {
         return rand % dnaModulus;
     }
 
-    function createRandomZombie(string _name) public {
+    function createRandomZombie(string memory _name) public {
         uint randDna = _generateRandomDna(_name);
         _createZombie(_name, randDna);
     }

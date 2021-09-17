@@ -1,5 +1,5 @@
  //SPDX-License-Identifier: MIT
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.16;
 
 import "./zombiefactory.sol";
 
@@ -39,7 +39,7 @@ contract ZombieFeeding is ZombieFactory {
       return (_zombie.readyTime <= now);
   }
 
-  function feedAndMultiply(uint _zombieId, uint _targetDna, string _species) internal onlyOwnerOf(_zombieId) {
+  function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal onlyOwnerOf(_zombieId) {
     Zombie storage myZombie = zombies[_zombieId];
     require(_isReady(myZombie));
     _targetDna = _targetDna % dnaModulus;
