@@ -1,14 +1,22 @@
 //1. Initialize `truffle-hdwallet-provider`
 const HDWalletProvider = require("@truffle/hdwallet-provider");
+
 require('dotenv').config()
+const { readFileSync } = require('fs')
+const path = require('path')
+const { join } = require('path')
 
 // Set your own mnemonic here
 const mnemonic = process.env.MNEMONIC;
 const rinkebyApiKey = process.env.INFURA_RINKEBY_API_KEY;
 const mainnetApiKey = process.env.INFURA_MAINNET_API_KEY;
 
-console.log("hiiii ");
-console.log(rinkebyApiKey);
+function getLoomProviderWithPrivateKey (privateKeyPath, chainId, writeUrl, readUrl) {
+  const privateKey = readFileSync(privateKeyPath, 'utf-8');
+  return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
+}
+
+
 // Module exports to make this configuration available to Truffle itself
 module.exports = {
   // Object with configuration for each network
@@ -46,6 +54,18 @@ module.exports = {
         return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
         },
       network_id: '9545242630824'
+    },
+    basechain: {
+      provider: function() {
+        const chainId = 'default';
+        const writeUrl = 'http://basechain.dappchains.com/rpc';
+        const readUrl = 'http://basechain.dappchains.com/query';
+        return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
+        const privateKeyPath = path.join(__dirname, 'mainnet_private_key');
+        const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl);
+        return loomTruffleProvider;
+        },
+      network_id: '*'
     },
   },
 };
