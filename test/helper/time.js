@@ -1,19 +1,11 @@
 async function increase(duration) {
   // first, let's increase time
-  let ans = await web3.currentProvider;
-
-  console.log(ans.send ? true : false);
-  console.log("anssssss");
-  console.log(ans);
-  await web3.currentProvider.send(
-    {
-      jsonrpc: "2.0",
-      method: "evm_increaseTime",
-      params: [duration], // there are 86400 seconds in a day
-      id: new Date().getTime(),
-    },
-    () => {}
-  );
+  await web3.currentProvider.send({
+    jsonrpc: "2.0",
+    method: "evm_increaseTime",
+    params: [duration], // there are 86400 seconds in a day
+    id: new Date().getTime(),
+  });
 
   //next, let's mine a new block
   web3.currentProvider.send({
@@ -22,6 +14,7 @@ async function increase(duration) {
     params: [],
     id: new Date().getTime(),
   });
+  return true;
 }
 
 const duration = {
